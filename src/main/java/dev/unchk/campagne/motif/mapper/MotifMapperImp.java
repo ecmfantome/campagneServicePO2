@@ -1,6 +1,6 @@
 package dev.unchk.campagne.motif.mapper;
 
-import dev.unchk.campagne.annonce.Annonce;
+import dev.unchk.campagne.dossier.Dossier;
 import dev.unchk.campagne.motif.Motif;
 import dev.unchk.campagne.motif.dto.MotifRequest;
 import dev.unchk.campagne.motif.dto.MotifResponse;
@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class MotifMapperImp  implements IMapper {
+public class MotifMapperImp implements IMapper {
     private final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public Motif toMotif(MotifRequest motifRequest) {
-       Motif motif =  modelMapper.map(motifRequest, Motif.class);
-        return   mapRelationMotif(motif, motifRequest);
+        Motif motif = modelMapper.map(motifRequest, Motif.class);
+        return mapRelationMotif(motif, motifRequest);
     }
 
- 
+
     @Override
     public MotifResponse toMotifResponse(Motif motif) {
         return modelMapper.map(motif, MotifResponse.class);
@@ -26,7 +26,7 @@ public class MotifMapperImp  implements IMapper {
 
     @Override
     public Motif mapRelationMotif(Motif motif, MotifRequest motifRequest) {
-     motif.setAnnonce(Annonce.builder().id(motifRequest.getAnnonceId()).build());
+        motif.setDossier(Dossier.builder().id(motifRequest.getDossierId()).build());
         return motif;
     }
 

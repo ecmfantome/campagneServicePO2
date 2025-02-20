@@ -2,7 +2,7 @@ package dev.unchk.campagne.annonce;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dev.unchk.campagne.annee.AnneeAcademique;
-import dev.unchk.campagne.motif.Motif;
+import dev.unchk.campagne.dossier.Dossier;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
@@ -39,9 +40,14 @@ public class Annonce {
     @JsonIgnoreProperties("annonces")
     private AnneeAcademique annee;
 
-    @OneToOne(mappedBy = "annonce", cascade = CascadeType.REMOVE)
+    //Relation Fields
+    @OneToMany(mappedBy = "annonce", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("annonce")
-    private Motif motif;
+    private List<Dossier> dossiers;
+
+//    @OneToOne(mappedBy = "annonce", cascade = CascadeType.REMOVE)
+//    @JsonIgnoreProperties("annonce")
+//    private Motif motif;
 
     //Fields System
     @CreatedDate
@@ -51,6 +57,6 @@ public class Annonce {
     private Date updatedAt;
 
     enum AnnonceStatus {
-        OUVERT , FERMER
+        OUVERT, FERMER
     }
 }

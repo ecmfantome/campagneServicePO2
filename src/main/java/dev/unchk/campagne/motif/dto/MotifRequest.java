@@ -14,5 +14,5 @@ public class MotifRequest {
     private String description;
 
     //Fields Relations
-    private String annonceId;
+    private String dossierId;
 }

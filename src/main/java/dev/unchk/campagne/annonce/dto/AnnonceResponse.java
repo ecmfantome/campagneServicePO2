@@ -1,11 +1,10 @@
 package dev.unchk.campagne.annonce.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import dev.unchk.campagne.annee.AnneeAcademique;
-import dev.unchk.campagne.motif.Motif;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import dev.unchk.campagne.dossier.Dossier;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -21,7 +20,9 @@ public class AnnonceResponse {
 
     //Fields Relations
     @JsonIgnoreProperties("annonce")
-    private Motif motif;
+    private List<Dossier> dossiers;
+//    @JsonIgnoreProperties("annonce")
+//    private Motif motif;
 //    @JsonIgnoreProperties("annonces")
 //    private AnneeAcademique annee;
 

@@ -1,7 +1,7 @@
 package dev.unchk.campagne.motif;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import dev.unchk.campagne.annonce.Annonce;
+import dev.unchk.campagne.dossier.Dossier;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,7 +27,7 @@ public class Motif {
     //Fields Relations
     @OneToOne
     @JsonIgnoreProperties("motif")
-    private Annonce annonce;
+    private Dossier dossier;
 
     //Fields System
     @CreatedDate

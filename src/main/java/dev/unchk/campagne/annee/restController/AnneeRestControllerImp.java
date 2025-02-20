@@ -1,4 +1,4 @@
-package dev.unchk.campagne.annee.resrController;
+package dev.unchk.campagne.annee.restController;
 
 import dev.unchk.campagne.annee.dto.AnneeRequest;
 import dev.unchk.campagne.annee.dto.AnneeResponse;
@@ -21,7 +21,7 @@ public class AnneeRestControllerImp implements IRestController {
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveAnnee(AnneeRequest annee, BindingResult bindingResult) {
+    public String saveAnnee(@RequestBody AnneeRequest annee, BindingResult bindingResult) {
         return anneeServiceImp.saveAnnee(annee, bindingResult);
 
     }
@@ -29,7 +29,7 @@ public class AnneeRestControllerImp implements IRestController {
     @Override
     @GetMapping
     public List<AnneeResponse> findAllAnnee() {
-        return  anneeServiceImp.findAllAnnee();
+        return anneeServiceImp.findAllAnnee();
     }
 
     @Override
@@ -40,13 +40,13 @@ public class AnneeRestControllerImp implements IRestController {
 
     @Override
     @PutMapping
-    public Boolean updateAnnee(AnneeRequest annee, BindingResult bindingResult) {
+    public Boolean updateAnnee(@RequestBody AnneeRequest annee, BindingResult bindingResult) {
         return anneeServiceImp.updateAnnee(annee, bindingResult);
     }
 
     @Override
     @DeleteMapping("/{anneeId}")
     public Boolean deleteAnnee(@PathVariable String anneeId) {
-        return  anneeServiceImp.deleteAnnee(anneeId);
+        return anneeServiceImp.deleteAnnee(anneeId);
     }
 }

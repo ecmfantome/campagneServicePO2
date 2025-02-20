@@ -1,4 +1,4 @@
-package dev.unchk.campagne.annee.resrController;
+package dev.unchk.campagne.annee.restController;
 
 import dev.unchk.campagne.annee.dto.AnneeRequest;
 import dev.unchk.campagne.annee.dto.AnneeResponse;

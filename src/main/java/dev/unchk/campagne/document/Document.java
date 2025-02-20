@@ -21,14 +21,10 @@ public class Document {
     private String id;
 
     private String name;
+    private String dossierId;
     @Lob
     private byte[] content;
     private String contentType;
-
-    // Relation Fields
-//    @OneToMany(mappedBy = "annee", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-//    @JsonIgnoreProperties("annee")
-//    private List<Annonce> annonces;
 
     // Relation Fields
     @CreatedDate

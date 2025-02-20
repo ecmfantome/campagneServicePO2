@@ -21,14 +21,14 @@ public class AnnonceRestControllerImp implements IRestController {
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveAnnonce(AnnonceRequest annonce, BindingResult bindingResult) {
+    public String saveAnnonce(@RequestBody AnnonceRequest annonce, BindingResult bindingResult) {
         return annonceServiceImp.saveAnnonce(annonce, bindingResult);
     }
 
     @Override
     @GetMapping("annee/{anneeId}")
     public List<AnnonceResponse> findAllAnnonceByAnneeId(@PathVariable String anneeId) {
-        return  annonceServiceImp.findAllAnnonceByAnneeId(anneeId);
+        return annonceServiceImp.findAllAnnonceByAnneeId(anneeId);
     }
 
     @Override
@@ -39,13 +39,13 @@ public class AnnonceRestControllerImp implements IRestController {
 
     @Override
     @PutMapping
-    public Boolean updateAnnonce(AnnonceRequest annonce, BindingResult bindingResult) {
+    public Boolean updateAnnonce(@RequestBody AnnonceRequest annonce, BindingResult bindingResult) {
         return annonceServiceImp.updateAnnonce(annonce, bindingResult);
     }
 
     @Override
     @DeleteMapping("/{annonceId}")
     public Boolean deleteAnnonce(@PathVariable String annonceId) {
-        return  annonceServiceImp.deleteAnnonce(annonceId);
+        return annonceServiceImp.deleteAnnonce(annonceId);
     }
 }

@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/motif")
@@ -21,7 +19,7 @@ public class MotifRestControllerImp implements IRestController {
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveMotif(MotifRequest motif, BindingResult bindingResult) {
+    public String saveMotif(@RequestBody MotifRequest motif, BindingResult bindingResult) {
         return motifServiceImp.saveMotif(motif, bindingResult);
     }
 
@@ -33,13 +31,13 @@ public class MotifRestControllerImp implements IRestController {
 
     @Override
     @PutMapping
-    public Boolean updateMotif(MotifRequest motif, BindingResult bindingResult) {
+    public Boolean updateMotif(@RequestBody MotifRequest motif, BindingResult bindingResult) {
         return motifServiceImp.updateMotif(motif, bindingResult);
     }
 
     @Override
     @DeleteMapping("/{motifId}")
     public Boolean deleteMotif(@PathVariable String motifId) {
-        return  motifServiceImp.deleteMotif(motifId);
+        return motifServiceImp.deleteMotif(motifId);
     }
 }

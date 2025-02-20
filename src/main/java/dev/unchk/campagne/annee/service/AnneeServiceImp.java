@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class AnneeServiceImp implements  IService{
+public class AnneeServiceImp implements IService {
 
     private final AnneeRepository anneeRepository;
     private final AnneeMapperImp anneeMapperImp;
@@ -23,7 +23,10 @@ public class AnneeServiceImp implements  IService{
 
     @Override
     public String saveAnnee(AnneeRequest anneeRequest, BindingResult bindingResult) throws RuntimeException {
-        sharedHandlerError.handlerValidate(bindingResult);
+//        sharedHandlerError.handlerValidate(bindingResult);
+        AnneeAcademique a = anneeMapperImp.toAnnee(anneeRequest);
+        System.out.println(a.getAnnee() + "**********************ANNNNN**************************");
+        System.out.println(anneeRequest.getAnnee() + "**********************ANNRRRRRNNN**************************");
         return anneeRepository.save(anneeMapperImp.toAnnee(anneeRequest)).getId();
     }
 
@@ -35,12 +38,12 @@ public class AnneeServiceImp implements  IService{
     @Override
     public AnneeResponse findAnneeById(String anneeId) throws RuntimeException {
         AnneeAcademique annee = checkAnnee(anneeId);
-        return  anneeMapperImp.toAnneeResponse(annee);
+        return anneeMapperImp.toAnneeResponse(annee);
     }
 
     @Override
     public Boolean updateAnnee(AnneeRequest anneeRequest, BindingResult bindingResult) throws RuntimeException {
-        sharedHandlerError.handlerValidate(bindingResult); 
+        sharedHandlerError.handlerValidate(bindingResult);
         checkAnnee(anneeRequest.getId());
         anneeRepository.save(anneeMapperImp.toAnnee(anneeRequest));
         return true;
