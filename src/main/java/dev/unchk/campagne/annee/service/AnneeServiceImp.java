@@ -25,8 +25,6 @@ public class AnneeServiceImp implements IService {
     public String saveAnnee(AnneeRequest anneeRequest, BindingResult bindingResult) throws RuntimeException {
 //        sharedHandlerError.handlerValidate(bindingResult);
         AnneeAcademique a = anneeMapperImp.toAnnee(anneeRequest);
-        System.out.println(a.getAnnee() + "**********************ANNNNN**************************");
-        System.out.println(anneeRequest.getAnnee() + "**********************ANNRRRRRNNN**************************");
         return anneeRepository.save(anneeMapperImp.toAnnee(anneeRequest)).getId();
     }
 

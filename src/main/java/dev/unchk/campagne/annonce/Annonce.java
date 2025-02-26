@@ -20,6 +20,7 @@ import java.util.List;
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 public class Annonce {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -35,7 +36,6 @@ public class Annonce {
     private String dateLimite;
 
     //Relation Fields
-
     @ManyToOne
     @JsonIgnoreProperties("annonces")
     private AnneeAcademique annee;
@@ -45,10 +45,9 @@ public class Annonce {
     @JsonIgnoreProperties("annonce")
     private List<Dossier> dossiers;
 
-//    @OneToOne(mappedBy = "annonce", cascade = CascadeType.REMOVE)
+    //    @OneToOne(mappedBy = "annonce", cascade = CascadeType.REMOVE)
 //    @JsonIgnoreProperties("annonce")
 //    private Motif motif;
-
     //Fields System
     @CreatedDate
     private Date createdAt;
@@ -56,7 +55,7 @@ public class Annonce {
     @LastModifiedDate
     private Date updatedAt;
 
-    enum AnnonceStatus {
+    public enum AnnonceStatus {
         OUVERT, FERMER
     }
 }

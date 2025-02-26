@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
+import static dev.unchk.campagne.annonce.Annonce.AnnonceStatus.OUVERT;
+
 @Service
 @AllArgsConstructor
 public class AnnonceServiceImp implements IService {
@@ -25,7 +27,9 @@ public class AnnonceServiceImp implements IService {
     @Override
     public String saveAnnonce(AnnonceRequest annonceRequest, BindingResult bindingResult) throws RuntimeException {
         sharedHandlerError.handlerValidate(bindingResult);
-        return annonceRepository.save(annonceMapperImp.toAnnonce(annonceRequest)).getId();
+        Annonce annonce = annonceMapperImp.toAnnonce(annonceRequest);
+        annonce.setStatus(OUVERT);
+        return annonceRepository.save(annonce).getId();
     }
 
     @Override
@@ -37,12 +41,12 @@ public class AnnonceServiceImp implements IService {
     @Override
     public AnnonceResponse findAnnonceById(String annonceId) throws RuntimeException {
         Annonce annonce = checkAnnonce(annonceId);
-        return  annonceMapperImp.toAnnonceResponse(annonce);
+        return annonceMapperImp.toAnnonceResponse(annonce);
     }
 
     @Override
     public Boolean updateAnnonce(AnnonceRequest annonceRequest, BindingResult bindingResult) throws RuntimeException {
-        sharedHandlerError.handlerValidate(bindingResult); 
+        sharedHandlerError.handlerValidate(bindingResult);
         checkAnnonce(annonceRequest.getId());
         annonceRepository.save(annonceMapperImp.toAnnonce(annonceRequest));
         return true;
@@ -57,7 +61,9 @@ public class AnnonceServiceImp implements IService {
 
     @Override
     public Annonce checkAnnonce(String annonceId) throws AnnonceNotFoundException {
-        if (annonceId == null) throw new AnnonceNotFoundException();
+        if (annonceId == null) {
+            throw new AnnonceNotFoundException();
+        }
         return annonceRepository.findById(annonceId).orElseThrow(AnnonceNotFoundException::new);
     }
 }
